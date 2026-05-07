@@ -1,348 +1,451 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wedding Invitation - Lukman & Triana</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<title>The Wedding | Lukman & Triana</title>
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
-    body{
-      font-family:'Poppins', sans-serif;
-      overflow:hidden;
-      background:#f6f2ea;
-      color:#1d5d38;
-    }
+<style>
 
-    :root{
-      --green:#1d5d38;
-      --soft:#f8f4ed;
-      --border:#2a6a43;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .slider{
-      width:100%;
-      height:100vh;
-      position:relative;
-    }
+:root{
+  --green:#2f6b45;
+  --soft:#f6f1e8;
+  --white:#ffffff;
+  --border:rgba(47,107,69,.25);
+}
 
-    .slide{
-      background:url('assets/floral/Background.webp') center center/cover no-repeat;
-    }
+html,
+body{
+  width:100%;
+  min-height:100%;
+  overflow:hidden;
+  font-family:'Poppins', sans-serif;
+  background:#f6f1e8;
+  color:var(--green);
+}
 
-    .slide.active{
-      opacity:1;
-      visibility:visible;
-    }
+/* =========================
+   SLIDER
+========================= */
 
-    .frame{
-      width:min(430px,100%);
-      height:95vh;
-      border:2px solid rgba(29,93,56,0.25);
-      border-radius:28px;
-      position:relative;
-      overflow:hidden;
-      padding:40px 28px;
-      background:rgba(255,255,255,0.4);
-      backdrop-filter:blur(3px);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-    }
+.slider{
+  width:100%;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+}
 
-    /* Floral Decoration */
-    .flower{
-      position:absolute;
-      width:180px;
-      opacity:.95;
-      animation:float 6s ease-in-out infinite;
-      pointer-events:none;
-    }
+/* =========================
+   SLIDE
+========================= */
 
-    .flower.top{
-      top:-10px;
-      left:-10px;
-    }
+.slide{
+  position:absolute;
+  inset:0;
 
-    .flower.bottom{
-      bottom:-10px;
-      right:-10px;
-      transform:rotate(180deg);
-    }
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
-    @keyframes float{
-      0%{ transform:translateY(0px);}
-      50%{ transform:translateY(10px);}
-      100%{ transform:translateY(0px);}
-    }
+  padding:clamp(14px,2vw,30px);
 
-    .title{
-      font-family:'Great Vibes', cursive;
-      font-size:3rem;
-      color:var(--green);
-      font-weight:bold;
-      line-height:1.2;
-    }
+  opacity:0;
+  pointer-events:none;
 
-    .subtitle{
-      font-size:1rem;
-      margin-top:10px;
-      letter-spacing:2px;
-      font-weight:600;
-      color:var(--green);
-    }
+  transition:opacity 1s ease;
 
-    .couple{
-      font-family:'Great Vibes', cursive;
-      font-size:3.2rem;
-      font-weight:bold;
-      color:var(--green);
-      line-height:1.1;
-    }
+  background:
+  linear-gradient(
+    rgba(255,248,240,.95),
+    rgba(255,248,240,.95)
+  ),
+  url('assets/background/bg.jpg')
+  center center/cover no-repeat;
 
-    .date{
-      margin-top:15px;
-      font-size:1.1rem;
-      font-weight:700;
-      letter-spacing:2px;
-      color:var(--green);
-    }
+  isolation:isolate;
+}
 
-    .opening-text,
-    .closing-text{
-      font-size:1rem;
-      line-height:1.9;
-      font-weight:700;
-      color:var(--green);
-      max-width:330px;
-    }
+.slide.active{
+  opacity:1;
+  pointer-events:auto;
+}
 
-    .couple-wrap{
-      margin-top:40px;
-    }
+/* overlay fix */
+.slide::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
 
-    .person{
-      margin-bottom:25px;
-    }
+/* =========================
+   FRAME
+========================= */
 
-    .person h2{
-      font-family:'Great Vibes', cursive;
-      font-size:2.7rem;
-      line-height:1.1;
-      color:var(--green);
-    }
+.frame{
 
-    .person p{
-      margin-top:10px;
-      font-size:.95rem;
-      font-weight:600;
-      color:var(--green);
-    }
+  position:relative;
+  z-index:2;
 
-    .ampersand{
-      font-family:'Great Vibes', cursive;
-      font-size:2.5rem;
-      margin:10px 0;
-      color:var(--green);
-    }
+  width:100%;
+  max-width:1000px;
 
-    .event-title{
-      font-family:'Great Vibes', cursive;
-      font-size:3rem;
-      color:var(--green);
-      margin-bottom:25px;
-      font-weight:bold;
-    }
+  min-height:94vh;
 
-    .event-box{
-      width:100%;
-      border:3px solid var(--border);
-      border-radius:25px;
-      padding:25px 22px;
-      text-align:left;
-      background:rgba(255,255,255,0.65);
-    }
+  border:1.5px solid var(--border);
 
-    .event-item{
-      display:flex;
-      align-items:flex-start;
-      gap:15px;
-      margin-bottom:20px;
-      color:var(--green);
-    }
+  border-radius:32px;
 
-    .event-item:last-child{
-      margin-bottom:0;
-    }
+  overflow:hidden;
 
-    .event-item i{
-      font-size:1.3rem;
-      margin-top:3px;
-    }
+  background:rgba(255,255,255,.15);
 
-    .event-item span{
-      font-size:1rem;
-      font-weight:600;
-      line-height:1.7;
-    }
+  backdrop-filter:blur(4px);
 
-    .map-btn{
-      margin-top:18px;
-      display:inline-block;
-      width:100%;
-      text-align:center;
-      padding:14px;
-      border-radius:18px;
-      text-decoration:none;
-      border:2px solid var(--green);
-      color:white;
-      background:var(--green);
-      font-weight:700;
-      transition:.3s;
-    }
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 
-    .map-btn:hover{
-      background:transparent;
-      color:var(--green);
-    }
+  text-align:center;
 
-    .nav-btn{
-      position:absolute;
-      bottom:25px;
-      right:25px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      cursor:pointer;
-      font-weight:700;
-      color:var(--green);
-      z-index:20;
-      user-select:none;
-    }
+  padding:
+  clamp(30px,4vw,70px)
+  clamp(20px,5vw,60px);
+}
 
-    .nav-btn i{
-      animation:arrowMove 1s infinite;
-    }
+/* =========================
+   FLOWER
+========================= */
 
-    @keyframes arrowMove{
-      0%{ transform:translateX(0);}
-      50%{ transform:translateX(6px);}
-      100%{ transform:translateX(0);}
-    }
+.flower{
+  position:absolute;
+  width:min(28vw,220px);
 
-    /* Couple Illustration */
-    .illustration{
-      width:230px;
-      max-width:75%;
-      margin:25px 0;
-      filter:drop-shadow(0 10px 20px rgba(0,0,0,0.1));
-      animation:floatCharacter 4s ease-in-out infinite;
-    }
+  opacity:.28;
 
-    @keyframes floatCharacter{
-      0%{transform:translateY(0px);}
-      50%{transform:translateY(-8px);}
-      100%{transform:translateY(0px);}
-    }
+  pointer-events:none;
 
-    /* Responsive */
-    @media(max-width:480px){
+  animation:floatFlower 6s ease-in-out infinite;
 
-      .frame{
-        padding:35px 22px;
-      }
+  z-index:1;
+}
 
-      .title{
-        font-size:2.5rem;
-      }
+.flower.top{
+  top:-10px;
+  left:-10px;
+}
 
-      .couple{
-        font-size:2.8rem;
-      }
+.flower.bottom{
+  right:-10px;
+  bottom:-10px;
+  transform:rotate(180deg);
+}
 
-      .event-title{
-        font-size:2.5rem;
-      }
+@keyframes floatFlower{
 
-      .person h2{
-        font-size:2.3rem;
-      }
+  0%{
+    transform:translateY(0px);
+  }
 
-      .opening-text,
-      .closing-text{
-        font-size:.95rem;
-      }
+  50%{
+    transform:translateY(10px);
+  }
 
-      .flower{
-        width:140px;
-      }
-    }
+  100%{
+    transform:translateY(0px);
+  }
+}
 
-    /* Background opacity layer */
-    .slide::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      background:rgba(255, 248, 240, 0.95);
-      z-index:0;
-    }
+/* =========================
+   TYPOGRAPHY
+========================= */
 
-    /* Supaya isi tetap di atas overlay */
-    .frame{
-      position:relative;
-      z-index:2;
-    }
+.title-small{
+  font-size:clamp(1rem,2vw,1.2rem);
+  letter-spacing:3px;
+  font-weight:700;
+  margin-bottom:20px;
+}
 
-    /* Bunga tetap terlihat */
-    .flower{
-      z-index:1;
-    }
+.handwriting{
+  font-family:'Great Vibes', cursive;
+  font-weight:700;
+  color:var(--green);
+}
 
-  </style>
+.main-title{
+  font-size:clamp(3.2rem,8vw,6rem);
+  line-height:1.1;
+}
+
+.date{
+  margin-top:18px;
+  font-size:clamp(1rem,2vw,1.2rem);
+  font-weight:700;
+  letter-spacing:3px;
+}
+
+.text{
+  max-width:850px;
+
+  line-height:2;
+
+  font-size:clamp(.95rem,2vw,1.1rem);
+
+  font-weight:700;
+}
+
+.name{
+  font-size:clamp(2.8rem,7vw,5rem);
+  line-height:1.15;
+}
+
+.info{
+  margin-top:12px;
+  font-size:clamp(.9rem,2vw,1rem);
+  font-weight:600;
+}
+
+.section-title{
+  font-size:clamp(3rem,7vw,5rem);
+  margin-bottom:30px;
+}
+
+/* =========================
+   ILLUSTRATION
+========================= */
+
+.illustration{
+  width:min(65vw,320px);
+
+  margin:20px 0;
+
+  object-fit:contain;
+
+  animation:floating 4s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  50%{
+    transform:translateY(-8px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+}
+
+/* =========================
+   EVENT BOX
+========================= */
+
+.event-box{
+
+  width:100%;
+  max-width:700px;
+
+  border:2px solid rgba(47,107,69,.3);
+
+  border-radius:26px;
+
+  background:rgba(255,255,255,.4);
+
+  padding:
+  clamp(22px,4vw,40px);
+
+  text-align:left;
+}
+
+.event-item{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+
+  margin-bottom:24px;
+}
+
+.event-item:last-child{
+  margin-bottom:0;
+}
+
+.event-item i{
+  font-size:1.3rem;
+  margin-top:4px;
+}
+
+.event-item span{
+  line-height:1.8;
+  font-weight:600;
+  font-size:clamp(.95rem,2vw,1.05rem);
+}
+
+/* =========================
+   MAP BUTTON
+========================= */
+
+.map-btn{
+
+  margin-top:20px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  width:100%;
+
+  padding:15px;
+
+  border-radius:20px;
+
+  text-decoration:none;
+
+  background:var(--green);
+
+  color:white;
+
+  border:2px solid var(--green);
+
+  font-weight:700;
+
+  transition:.35s ease;
+}
+
+.map-btn:hover{
+  background:transparent;
+  color:var(--green);
+}
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.nav-btn{
+
+  position:absolute;
+
+  bottom:25px;
+  right:25px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  z-index:20;
+
+  user-select:none;
+}
+
+.nav-btn i{
+  animation:arrow 1s infinite;
+}
+
+@keyframes arrow{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  50%{
+    transform:translateX(6px);
+  }
+
+  100%{
+    transform:translateX(0);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+  .frame{
+    min-height:96vh;
+  }
+
+  .event-box{
+    text-align:left;
+  }
+
+  .flower{
+    width:140px;
+  }
+
+  .nav-btn{
+    bottom:18px;
+    right:18px;
+  }
+}
+
+</style>
 </head>
 <body>
 
-<!-- Background Music -->
-<audio id="bgMusic" autoplay loop>
-  <source src="assets/music/Piano Valentine Wedding.mp3" type="audio/mp3">
+<!-- =========================
+     MUSIC
+========================= -->
+
+<audio id="bgMusic" loop>
+  <source src="assets/music/wedding-music.mp3" type="audio/mp3">
 </audio>
 
 <div class="slider">
 
-  <!-- SLIDE 1 -->
+  <!-- =========================
+       SLIDE 1
+  ========================= -->
+
   <section class="slide active">
+
     <div class="frame">
 
       <img class="flower top"
-      src="assets/floral/Top.png">
+      src="assets/floral/top.gif">
 
       <img class="flower bottom"
-      src="assets/floral/Bottom.png">
+      src="assets/floral/bottom.gif">
 
-      <h1 class="title">The Wedding</h1>
+      <div class="title-small">
+        The Wedding
+      </div>
 
-      <!-- Gambar ilustrasi pengantin -->
       <img
-        class="illustration"
-        src="assets/ilustration/Ikon Pengantin.png"
-        alt="Pengantin Jawa">
+      class="illustration"
+      src="assets/img/pengantin.png"
+      alt="Pengantin">
 
-      <h2 class="couple">Lukman & Triana</h2>
+      <h1 class="handwriting main-title">
+        Lukman & Triana
+      </h1>
 
-      <div class="date">10.06.2026</div>
+      <div class="date">
+        10.06.2026
+      </div>
 
       <div class="nav-btn" onclick="nextSlide()">
         <span>Lanjut</span>
@@ -350,36 +453,66 @@
       </div>
 
     </div>
+
   </section>
 
-  <!-- SLIDE 2 -->
+  <!-- =========================
+       SLIDE 2
+  ========================= -->
+
   <section class="slide">
+
     <div class="frame">
 
       <img class="flower top"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/top.gif">
 
       <img class="flower bottom"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/bottom.gif">
 
-      <div class="opening-text">
+      <div class="text">
+
         Dengan mengucap syukur atas karunia Tuhan Yang Maha Esa,
         tanpa mengurangi rasa hormat,
-        perkenankanlah kami mengundang Bapak/Ibu/Saudara/i dalam acara pernikahan kami,
+        perkenankanlah kami mengundang
+        Bapak/Ibu/Saudara/i
+        dalam acara pernikahan kami,
+
       </div>
 
-      <div class="couple-wrap">
+      <div style="margin-top:45px;">
 
-        <div class="person">
-          <h2>Kurnia Lukman Firmansyah</h2>
-          <p>mempelai pria keluarga Lanang Pamuji</p>
+        <div>
+
+          <h1 class="handwriting name">
+            Kurnia Lukman Firmansyah
+          </h1>
+
+          <div class="info">
+            mempelai pria keluarga Lanang Pamuji
+          </div>
+
         </div>
 
-        <div class="ampersand">&</div>
+        <div
+        class="handwriting"
+        style="
+        font-size:3rem;
+        margin:25px 0;
+        ">
+          &
+        </div>
 
-        <div class="person">
-          <h2>Trianawati</h2>
-          <p>mempelai wanita keluarga Sunarto</p>
+        <div>
+
+          <h1 class="handwriting name">
+            Trianawati
+          </h1>
+
+          <div class="info">
+            mempelai wanita keluarga Sunarto
+          </div>
+
         </div>
 
       </div>
@@ -390,46 +523,68 @@
       </div>
 
     </div>
+
   </section>
 
-  <!-- SLIDE 3 -->
+  <!-- =========================
+       SLIDE 3
+  ========================= -->
+
   <section class="slide">
+
     <div class="frame">
 
       <img class="flower top"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/top.gif">
 
       <img class="flower bottom"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/bottom.gif">
 
-      <h1 class="event-title">Akad Nikah</h1>
+      <h1 class="handwriting section-title">
+        Akad Nikah
+      </h1>
 
       <div class="event-box">
 
         <div class="event-item">
+
           <i class="fa-regular fa-calendar"></i>
-          <span>Rabu, 10 Juni 2026</span>
-        </div>
 
-        <div class="event-item">
-          <i class="fa-regular fa-clock"></i>
-          <span>09.00 WIB</span>
-        </div>
-
-        <div class="event-item">
-          <i class="fa-solid fa-location-dot"></i>
           <span>
-            Dusun Kerep RT.03 RW.02,<br>
-            Kel.Anggaswangi, Kec. Godong,<br>
+            Rabu, 10 Juni 2026
+          </span>
+
+        </div>
+
+        <div class="event-item">
+
+          <i class="fa-regular fa-clock"></i>
+
+          <span>
+            09.00 WIB
+          </span>
+
+        </div>
+
+        <div class="event-item">
+
+          <i class="fa-solid fa-location-dot"></i>
+
+          <span>
+            Dusun Kerep RT.03 RW.02,
+            Kel.Anggaswangi, Kec. Godong,
             Grobogan, Jawa Tengah
           </span>
+
         </div>
 
         <a
-          class="map-btn"
-          href="https://maps.google.com"
-          target="_blank">
+        class="map-btn"
+        href="https://maps.google.com"
+        target="_blank">
+
           LIHAT PETA
+
         </a>
 
       </div>
@@ -440,58 +595,90 @@
       </div>
 
     </div>
+
   </section>
 
-  <!-- SLIDE 4 -->
+  <!-- =========================
+       SLIDE 4
+  ========================= -->
+
   <section class="slide">
+
     <div class="frame">
 
       <img class="flower top"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/top.gif">
 
       <img class="flower bottom"
-      src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif">
+      src="assets/floral/bottom.gif">
 
-      <div class="closing-text">
+      <div class="text">
+
         Merupakan suatu kehormatan dan kebahagiaan bagi kami
-        apabila Bapak/Ibu/Saudara/i dapat berkenan hadir dan memberikan doa restu.
+        apabila Bapak/Ibu/Saudara/i dapat berkenan hadir
+        dan memberikan doa restu.
+
       </div>
 
-      <div style="margin-top:50px;">
-        <h1 class="couple">Lukman & Triana</h1>
-      </div>
+      <h1
+      class="handwriting main-title"
+      style="margin-top:55px;">
+
+        Lukman & Triana
+
+      </h1>
 
     </div>
+
   </section>
 
 </div>
 
 <script>
 
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
+/* =========================
+   SLIDER
+========================= */
 
-  function nextSlide(){
+const slides = document.querySelectorAll('.slide');
 
-    slides[current].classList.remove('active');
+let current = 0;
 
-    current++;
+function nextSlide(){
 
-    if(current >= slides.length){
-      current = 0;
-    }
+  slides[current].classList.remove('active');
 
-    slides[current].classList.add('active');
+  current++;
+
+  if(current >= slides.length){
+    current = 0;
   }
 
-  /* Auto play fix mobile browser */
-  window.addEventListener('click', () => {
-    const music = document.getElementById('bgMusic');
+  slides[current].classList.add('active');
+}
 
-    if(music.paused){
-      music.play();
-    }
-  });
+/* =========================
+   AUDIO FIX MOBILE
+========================= */
+
+function initAudio(){
+
+  const music = document.getElementById('bgMusic');
+
+  music.play();
+}
+
+document.body.addEventListener(
+  'touchstart',
+  initAudio,
+  {once:true}
+);
+
+document.body.addEventListener(
+  'click',
+  initAudio,
+  {once:true}
+);
 
 </script>
 
