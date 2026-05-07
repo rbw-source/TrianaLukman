@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>The Wedding | Lukman & Triana</title>
 
 <!-- Google Fonts -->
@@ -378,6 +377,47 @@ body{
   }
 }
 
+  .prev-btn{
+
+  position:absolute;
+
+  bottom:25px;
+  left:25px;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  cursor:pointer;
+
+  font-weight:700;
+
+  z-index:20;
+
+  user-select:none;
+
+  color:var(--green);
+}
+
+.prev-btn i{
+  animation:arrowLeft 1s infinite;
+}
+
+@keyframes arrowLeft{
+
+  0%{
+    transform:translateX(0);
+  }
+
+  50%{
+    transform:translateX(-6px);
+  }
+
+  100%{
+    transform:translateX(0);
+  }
+}
+  
 /* =========================
    RESPONSIVE
 ========================= */
@@ -516,7 +556,10 @@ body{
         </div>
 
       </div>
-
+      <div class="prev-btn" onclick="prevSlide()">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Kembali</span>
+      </div>
       <div class="nav-btn" onclick="nextSlide()">
         <span>Lanjut</span>
         <i class="fa-solid fa-arrow-right"></i>
@@ -588,7 +631,10 @@ body{
         </a>
 
       </div>
-
+      <div class="prev-btn" onclick="prevSlide()">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Kembali</span>
+      </div>
       <div class="nav-btn" onclick="nextSlide()">
         <span>Lanjut</span>
         <i class="fa-solid fa-arrow-right"></i>
@@ -627,7 +673,10 @@ body{
         Lukman & Triana
 
       </h1>
-
+    <div class="prev-btn" onclick="prevSlide()">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Kembali</span>
+    </div>
     </div>
 
   </section>
@@ -652,6 +701,18 @@ function nextSlide(){
 
   if(current >= slides.length){
     current = 0;
+  }
+
+  slides[current].classList.add('active');
+}
+function prevSlide(){
+
+  slides[current].classList.remove('active');
+
+  current--;
+
+  if(current < 0){
+    current = slides.length - 1;
   }
 
   slides[current].classList.add('active');
